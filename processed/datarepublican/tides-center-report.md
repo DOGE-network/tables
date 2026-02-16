@@ -4,7 +4,7 @@
 
 ## Overview
 
-This report consolidates all data found in the dood-website repository related to the Tides family of nonprofit organizations. All references to California tidelands (State Lands Commission, tide and submerged lands, tideland revenues) have been excluded.
+This report consolidates all data from two repositories — **dood-website** (datarepublican datasets, CA vendor JSONs) and **cali_doge** (California DOGE transparency platform, Supabase database, web research) — related to the Tides family of nonprofit organizations. All references to California tidelands (State Lands Commission, tide and submerged lands, tideland revenues) have been excluded.
 
 ---
 
@@ -187,9 +187,32 @@ Focus areas: Asia advancement, diaspora engagement, LGBTI rights, civil society,
 
 ---
 
-## 6. California State Vendor Transactions
+## 6. California State Payments to Tides Center
 
-**8 records** of California state payments to Tides Center found in vendor transaction data (2016–2024).
+### 6a. Full Agency Breakdown (cali_doge research + vendor JSONs combined)
+
+California has sent approximately **$18 million** to Tides Center (EIN: 94-3213100) since 2019, distributed across **18 state agencies**.
+
+| State Agency | Org Code | Amount |
+|---|---|---|
+| Dept. of Health Care Services | 4260 | $8,800,000 |
+| Dept. of Public Health | 4265 | $3,400,000 |
+| Coastal Commission | 3720 | $500,000+ |
+| CARB (Air Resources Board) | 3900 | $100,000 |
+| CalEPA | 0555 | $95,000 |
+| State Library | 6120 | $70,000 |
+| Wildlife Conservation Board | 3640 | $217,505 |
+| Office of Planning & Research | 650 | $37,500 |
+| Public Utilities Commission | 8660 | $4,307 |
+| 12 other agencies | — | < $500K each |
+
+**Total California state payments: ~$18,000,000** (since 2019)
+
+*Sources: Washington Free Beacon, Americans for Public Trust analysis, Open FI$Cal, cali_doge Supabase database*
+
+### 6b. Vendor Transaction Detail (from dood-website vendor JSONs)
+
+8 itemized records found in the vendor transaction JSON files (2016–2024):
 
 | State Department | Org Code | Expense Type | Category | Amount | Transactions |
 |---|---|---|---|---|---|
@@ -203,15 +226,40 @@ Focus areas: Asia advancement, diaspora engagement, LGBTI rights, civil society,
 | Office of Planning & Research | 650 | Special Items of Expense | Grants and Subventions | $37,500 | 1 |
 | Public Utilities Commission | 8660 | Special Items of Expense | Grants and Subventions | $4,307 | 1 |
 
-**Total California state payments to Tides Center: ~$6,628,689**
+**Subtotal from vendor JSONs: $6,628,689** (partial — covers only years with JSON data available)
 
 Additionally, 1 record for **Changing Tides Foundation** (separate organization) was found.
 
 *Source: `raw/californiadoge/vendors/vendors_json_concat_by_year.zip`*
 
+### 6c. Transparency Gap
+
+Only **6 of 18 agencies** disclosed which Tides Center project actually received funds (~$4M / **22% of total**). The Tides Center acts as a **fiscal sponsor for 78+ sub-organizations**, making it difficult to track where state funds ultimately end up.
+
 ---
 
-## 7. Data Sources Summary
+## 7. Federal Government Funding
+
+Tides Center has received **$170M+ in federal government grants** over 17 years (2001–2018), with significant year-over-year growth:
+
+| Period | Annual Average |
+|---|---|
+| Early years (~2001) | ~$3.4M/year |
+| FY2024 (Form 990 Line 1e) | $37.8M |
+
+**2024 Form 990 highlights:**
+- Government grants (Line 1e): **$37.8M**
+- Total grants paid out: **$50.9M**
+
+The Tides Center's federal funding has grown **11x** from its early annual levels to present day.
+
+*Sources: ProPublica Nonprofit Explorer (Tides Center 990s), InfluenceWatch, Americans for Public Trust*
+
+---
+
+## 8. Data Sources Summary
+
+### dood-website repository
 
 | File | Location | Format | Tides Records | Key Data |
 |---|---|---|---|---|
@@ -223,9 +271,27 @@ Additionally, 1 record for **Changing Tides Foundation** (separate organization)
 | Open_Society_Grants_19jun25.tsv | `processed/datarepublican/` | TSV | 153 grants | Detailed Open Society grant data |
 | vendor_transaction_*.json | `raw/californiadoge/vendors/` (zip) | JSON, 533MB | 8 Tides Center + 1 Changing Tides | California state vendor payments |
 
+### cali_doge repository (session_01Qk9aZhKuhR5XMfku4gVfyD)
+
+| Source | Key Data |
+|---|---|
+| research/tides-center-budget-data.md | Full research report: agency breakdowns, financial summaries, org profile |
+| research/query-tides-center.sql | 10 SQL queries for Supabase database extraction |
+| Supabase database (cali-doge.org) | Vendor transactions — requires credentials to query directly |
+| Washington Free Beacon | $18M CA state payments to Tides Center |
+| Americans for Public Trust | Agency-level breakdown analysis |
+| Open FI$Cal (open.fiscal.ca.gov) | California state spending portal |
+| ProPublica Nonprofit Explorer | Tides Center 990 filings (2001–2024) |
+| InfluenceWatch | Tides Center organizational profile, fiscal sponsorship details |
+
+### External references (990 PDFs for manual review)
+
+- Tides Center Form 990 filings available via ProPublica Nonprofit Explorer
+- Key schedules: Schedule I (grants paid) and Schedule B (contributor details) for California agency breakdown
+
 ---
 
-## 8. Key Findings
+## 9. Key Findings
 
 1. **Scale:** The five core Tides organizations collectively reported ~$945M in revenue, ~$1.14B in expenses, and ~$1.98B in total assets (2023).
 
@@ -237,8 +303,21 @@ Additionally, 1 record for **Changing Tides Foundation** (separate organization)
 
 5. **Top external grant recipients:** The Asia Foundation ($33M), Witness to Innocence ($32M), State Democracy Project ($20M), Windward Fund ($20M), and Kunhardt Film Foundation ($20M).
 
-6. **California state payments:** Tides Center received ~$6.6M from California agencies including Health Care Services ($4.4M), Public Health ($1.9M), Wildlife Conservation Board ($218K), Planning & Research ($38K), and Public Utilities Commission ($4K).
+6. **California state payments:** Tides Center received ~$18M from 18 California state agencies since 2019. Largest payers: Health Care Services ($8.8M), Public Health ($3.4M), Coastal Commission ($500K+). Vendor JSON data independently confirms $6.6M across 8 itemized transaction records.
 
-7. **Shared infrastructure:** All five core organizations share PO boxes in the 94129 zip code (San Francisco, CA), suggesting shared physical operations.
+7. **Federal funding growth:** Tides Center received $170M+ in federal grants (2001–2018), growing from $3.4M/year to $37.8M in FY2024 — an 11x increase.
 
-8. **Inter-org transfers:** Tides Foundation made $68M in grants to other Tides entities; Tides Center made $11.6M in inter-org transfers.
+8. **Fiscal sponsorship opacity:** Tides Center acts as fiscal sponsor for 78+ sub-organizations. Only 22% ($4M of $18M) of California state payments disclosed the specific sub-project receiving funds.
+
+9. **Shared infrastructure:** All five core organizations share PO boxes in the 94129 zip code (San Francisco, CA), suggesting shared physical operations.
+
+10. **Inter-org transfers:** Tides Foundation made $68M in grants to other Tides entities; Tides Center made $11.6M in inter-org transfers.
+
+---
+
+## 10. Open Questions / Next Steps
+
+1. **Supabase queries:** 10 SQL queries are ready in `cali_doge/research/query-tides-center.sql` — need database credentials to run against the full vendor dataset
+2. **990 Schedule review:** Schedule I (grants paid) and Schedule B (contributors) would reveal the specific California agency-to-project mapping for the remaining 78% of undisclosed payments
+3. **Vendor name variations:** The vendor may appear under "The Tides Center Inc" or by EIN 94-3213100 in additional records not yet matched
+4. **Year-by-year trend:** Full time-series analysis of CA state payments (2016–2024) requires complete vendor JSON extraction across all 9 year files
